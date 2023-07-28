@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"strings"
 
-	"Go-cli-boilerplate/models"
+	"github.com/PlatformEngineers/cas-go-cli/models"
 
 	"github.com/spf13/cobra"
 )

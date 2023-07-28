@@ -1,4 +1,4 @@
-module Go-cli-boilerplate
+module github.com/PlatformEngineers/cas-go-cli
 
 go 1.20
 

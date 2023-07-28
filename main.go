@@ -3,7 +3,7 @@ Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 */
 package main
 
-import "Go-cli-boilerplate/cmd"
+import "github.com/PlatformEngineers/cas-go-cli/cmd"
 
 func main() {
 	cmd.Execute()

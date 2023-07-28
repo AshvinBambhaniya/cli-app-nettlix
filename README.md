@@ -2,7 +2,6 @@
 
 This repository contains dataset information, and questions list.
 
-We are using for asdf(https://asdf-vm.com/) (https://wiki.improwised.com/s/e03445b6-2fb5-4352-b50e-dcd56aa103ab) for managing multiple runtime versions.
 
 #### Pre-commit
 
@@ -32,12 +31,14 @@ $> pip install pre-commit
 $> pre-commit
 ```
 
-### CLI Excercise
 
-In this CLI excerise you will create the commands for below questions. We are using https://github.com/spf13/cobra package for making the command. CLI questions found in Issue.
+### After command created
 
-Dataset: https://www.kaggle.com/datasets/dgoenrique/netflix-movies-and-tv-shows
+```Shell
+#run the main file
+$> go run main.go
 
-Please refer https://github.com/Improwised/phoenix-shailja-goswami-backend/issues/1 for CLI excerice.
+#to run particular command and flag
+$> go run main.go cmdName --flagname[it can be multiple] 
 
-Please refer https://github.com/Improwised/phoenix-shailja-goswami-backend/issues/2 for API excercise.
+```

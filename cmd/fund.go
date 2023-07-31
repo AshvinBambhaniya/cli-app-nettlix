@@ -89,6 +89,26 @@ var fundCmd = &cobra.Command{
 				}
 		}
 
+		isin, err := cmd.Flags().GetString("isin")
+		if err != nil {
+			log.Fatal(err)
+		}
+
+	
+		if isin != "" {
+			searchisin := models.GetIsinScheme(records, strings.ToUpper(isin))
+			// fmt.Println(searchisin)
+			if searchisin.Net_Asset_Value != 0{
+				fmt.Println("Scheme Code: ", searchisin.Scheme_Code)
+				fmt.Println("ISIN Growth: ", searchisin.ISIN_Growth)
+				fmt.Println("Scheme Name: ", searchisin.Scheme_Name)
+				fmt.Println("Net Asset Value: ", searchisin.Net_Asset_Value)
+				fmt.Println("Date: ", searchisin.Date)
+			}else{
+				fmt.Println("ISIN code is not available")
+			}
+		}
+
 	},
 }
 
@@ -96,6 +116,7 @@ var fundCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(fundCmd)
 	fundCmd.Flags().String("scheme_name", "", "get the list of the schema based on the name")
+	fundCmd.Flags().String("isin", "", "get the schema based on the ISIN Div Payout/ ISIN Growth")
 	fundCmd.Flags().BoolP("count", "c", false, "Count of the Funds")
 	fundCmd.Flags().BoolP("nav", "n", false, "get the Scheme by the --min NAV and --max NAV")
 	fundCmd.Flags().BoolP("min", "", false, "get the minimum NAV Scheme")

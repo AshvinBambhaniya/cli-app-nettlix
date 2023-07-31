@@ -100,3 +100,14 @@ func GetMaxMinNetAssetValue(records Funds) (Fund, Fund) {
 	return min, max
 
 }
+
+func GetIsinScheme(records Funds, isin string) Fund {
+	var isinScheme Fund
+	for _, row := range records {
+		if row.ISIN_Growth == isin{
+			isinScheme = row
+			return isinScheme
+		}
+	}
+	return Fund{}
+}

@@ -101,6 +101,7 @@ var fundCmd = &cobra.Command{
 			if searchisin.Net_Asset_Value != 0{
 				fmt.Println("Scheme Code: ", searchisin.Scheme_Code)
 				fmt.Println("ISIN Growth: ", searchisin.ISIN_Growth)
+				fmt.Println("ISIN Div Reinvestment: ", searchisin.ISIN_Div_Reinvestment)
 				fmt.Println("Scheme Name: ", searchisin.Scheme_Name)
 				fmt.Println("Net Asset Value: ", searchisin.Net_Asset_Value)
 				fmt.Println("Date: ", searchisin.Date)

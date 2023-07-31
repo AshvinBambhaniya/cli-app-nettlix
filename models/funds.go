@@ -104,7 +104,7 @@ func GetMaxMinNetAssetValue(records Funds) (Fund, Fund) {
 func GetIsinScheme(records Funds, isin string) Fund {
 	var isinScheme Fund
 	for _, row := range records {
-		if row.ISIN_Growth == isin{
+		if row.ISIN_Growth == isin || row.ISIN_Div_Reinvestment == isin{
 			isinScheme = row
 			return isinScheme
 		}

@@ -7,7 +7,7 @@ import (
 	// "log"
 
 	// "strconv"
-	// "strings"
+	"strings"
 
 	"fmt"
 	"log"
@@ -75,33 +75,27 @@ var fundCmd = &cobra.Command{
 			}
 		}
 
-	},
-}
-
-var fundSearchCmd = &cobra.Command{
-	Use:   "searchfund",
-	Short: "Display the searched Scheme result",
-	Long:  `The command will display the show of scheme passed as an argument.`,
-	Run: func(cmd *cobra.Command, args []string) {
-
-		records, err := models.ReadFile(pathforCSV)
+		//show type flag command
+		scheme_name, err := cmd.Flags().GetString("scheme_name")
 		if err != nil {
 			log.Fatal(err)
 		}
-		// fmt.Println(records)
-		if len(args) != 0 {
-			scheme := args[0]
-			searchScheme := models.ListByFundSearch(records, scheme)
-			for i := 0; i < len(searchScheme); i++ {
-				fmt.Println("\n", searchScheme[i])
-			}
+
+	
+		if scheme_name != "" {
+			searchScheme := models.ListByFundSearch(records, strings.ToLower(scheme_name))
+				for i := 0; i < len(searchScheme); i++ {
+					fmt.Println("\n", searchScheme[i])
+				}
 		}
+
 	},
 }
 
+
 func init() {
 	rootCmd.AddCommand(fundCmd)
-	fundCmd.AddCommand(fundSearchCmd)
+	fundCmd.Flags().String("scheme_name", "", "get the list of the schema based on the name")
 	fundCmd.Flags().BoolP("count", "c", false, "Count of the Funds")
 	fundCmd.Flags().BoolP("nav", "n", false, "get the Scheme by the --min NAV and --max NAV")
 	fundCmd.Flags().BoolP("min", "", false, "get the minimum NAV Scheme")

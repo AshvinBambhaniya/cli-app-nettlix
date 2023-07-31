@@ -1,6 +1,7 @@
 package models
 
 import (
+	// "fmt"
 	"encoding/csv"
 	"log"
 	"os"
@@ -110,4 +111,68 @@ func GetIsinScheme(records Funds, isin string) Fund {
 		}
 	}
 	return Fund{}
+}
+
+func GetSchemeByMonth(records Funds, month string) Funds{
+	var searchedFund Funds
+
+	for _,row := range records{
+		
+		temparr := strings.Split(row.Date,"-")
+		if len(temparr) == 3 {
+
+			if (month == temparr[1]) {
+				searchedFund = append(searchedFund,row)
+			}
+		}
+	}
+
+	return searchedFund
+}
+
+func GetSchemeByDate(records Funds, date string) Funds{
+	var searchedFund Funds
+
+	for _,row := range records{
+		
+		temparr := strings.Split(row.Date,"-")
+		if len(temparr) == 3 {
+
+			if (date == temparr[0]) {
+				searchedFund = append(searchedFund,row)
+			}
+		}
+	}
+
+	return searchedFund
+}
+
+func GetSchemeByDateMonth(records Funds, date string, month string) Funds{
+
+	var searchedFund Funds
+
+	for _,row := range records{
+		
+		temparr := strings.Split(row.Date,"-")
+		if len(temparr) == 3 {
+
+			if (date == temparr[0]) {
+				searchedFund = append(searchedFund,row)
+			}
+		}
+	}
+	var originalFund Funds
+
+	for _,row := range searchedFund{
+		
+		temparr := strings.Split(row.Date,"-")
+		if len(temparr) == 3 {
+
+			if (month == temparr[1]) {
+				originalFund = append(originalFund,row)
+			}
+		}
+	}
+
+	return originalFund
 }

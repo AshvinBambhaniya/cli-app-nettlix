@@ -6,7 +6,7 @@ package cmd
 import (
 	// "log"
 
-	// "strconv"
+	"strconv"
 	"strings"
 
 	"fmt"
@@ -110,6 +110,50 @@ var fundCmd = &cobra.Command{
 			}
 		}
 
+		date, err := cmd.Flags().GetInt("date")
+		if err != nil {
+			log.Fatal(err)
+		}
+		
+
+		month, err := cmd.Flags().GetString("month")
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		if (date != 0){
+			if(month == ""){
+				dateStr := strconv.Itoa(date)
+				searchDate := models.GetSchemeByDate(records,dateStr)
+				for i := 0; i < len(searchDate); i++ {
+					fmt.Println("\n", searchDate[i])
+				}
+			}
+			
+		}
+
+		if(month != ""){
+			if(date == 0){
+				searchDateMonth := models.GetSchemeByMonth(records,month)
+				for i := 0; i < len(searchDateMonth); i++ {
+					fmt.Println("\n", searchDateMonth[i])
+				}
+			}
+			
+		}
+
+
+		if (date != 0){
+			if(month != ""){
+				dateStr := strconv.Itoa(date)
+				searchDateMonth := models.GetSchemeByDateMonth(records,dateStr,month)
+				for i := 0; i < len(searchDateMonth); i++ {
+					fmt.Println("\n", searchDateMonth[i])
+				}
+			}
+			
+		}
+
 	},
 }
 
@@ -122,4 +166,6 @@ func init() {
 	fundCmd.Flags().BoolP("nav", "n", false, "get the Scheme by the --min NAV and --max NAV")
 	fundCmd.Flags().BoolP("min", "", false, "get the minimum NAV Scheme")
 	fundCmd.Flags().BoolP("max", "", false, "get the maximum NAV Scheme")
+	fundCmd.Flags().String("month", "", "get the scheme according to month")
+	fundCmd.Flags().Int("date", 0, "get the scheme according to date")
 }
